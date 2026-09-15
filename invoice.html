@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Invoice Generator | Unique IT PK Services</title>
+<style>
+:root{--navy:#071a36;--blue:#008fe5;--red:#e60012;--bg:#eef3f8;--white:#fff;--text:#182334;--muted:#687386;--line:#dbe2ea}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Segoe UI,Arial,sans-serif;color:var(--text)}
+.top{background:linear-gradient(135deg,var(--navy),#123d70);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;z-index:10;box-shadow:0 3px 16px #0003}
+.brand{display:flex;align-items:center;gap:14px}.brand img{width:58px;height:58px;object-fit:contain;border-radius:10px;background:#000}.brand h1{font-size:20px;margin:0}.brand p{margin:3px 0 0;color:#b9d7ef;font-size:12px}.back{color:#fff;text-decoration:none;border:1px solid #ffffff55;padding:9px 14px;border-radius:8px}
+.wrap{max-width:1250px;margin:28px auto;padding:0 18px;display:grid;grid-template-columns:390px 1fr;gap:24px}.panel,.invoice{background:#fff;border-radius:14px;box-shadow:0 8px 28px #19304a12}.panel{padding:20px;height:max-content}.panel h2{font-size:18px;margin:0 0 16px;color:var(--navy)}
+label{display:block;font-size:12px;font-weight:700;margin:12px 0 6px;color:#465267}input,textarea,select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}textarea{min-height:65px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.items-head,.item{display:grid;grid-template-columns:1fr 70px 90px 90px 34px;gap:6px;align-items:center}.items-head{font-size:10px;color:var(--muted);font-weight:700;margin:14px 0 5px}.item{margin-bottom:7px}.item input{padding:8px;font-size:12px}.item .amount{font-size:12px;font-weight:700;text-align:right;padding-right:4px}.del{border:0;background:#fee;color:var(--red);border-radius:7px;height:34px;cursor:pointer;font-weight:bold}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700}.primary{background:var(--red);color:#fff}.blue{background:var(--blue);color:#fff}.dark{background:var(--navy);color:#fff}.light{background:#eef3f8;color:var(--navy)}
+.invoice{padding:42px;min-height:900px}.inv-head{display:flex;justify-content:space-between;gap:30px;border-bottom:5px solid var(--red);padding-bottom:22px}.company{display:flex;gap:15px}.company img{width:85px;height:85px;object-fit:contain;background:#000;border-radius:8px}.company h2{margin:0;color:var(--navy);font-size:25px}.company p{margin:3px 0;color:var(--muted);font-size:12px}.inv-title{text-align:right}.inv-title h1{margin:0;color:var(--red);font-size:34px;letter-spacing:1px}.inv-title div{font-size:12px;margin-top:5px}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:25px 0}.details h3{font-size:11px;text-transform:uppercase;color:var(--red);margin:0 0 8px}.details p{margin:3px 0;font-size:13px}.table{width:100%;border-collapse:collapse;margin-top:5px}.table th{background:var(--navy);color:#fff;padding:11px;text-align:left;font-size:12px}.table td{padding:11px;border-bottom:1px solid var(--line);font-size:12px}.table th:last-child,.table td:last-child{text-align:right}
+.summary{margin-left:auto;width:310px;margin-top:20px}.sum{display:flex;justify-content:space-between;padding:7px 0;font-size:13px}.grand{border-top:2px solid var(--navy);border-bottom:2px solid var(--navy);font-size:17px;font-weight:800;padding:12px 0;color:var(--navy)}.notes{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;font-size:11px;color:var(--muted)}.sign{margin-top:45px;text-align:right;font-size:12px}.status{display:inline-block;padding:5px 10px;border-radius:20px;background:#eaf7ee;color:#16753b;font-weight:700;font-size:11px}
+.history{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}.history-list{max-height:180px;overflow:auto}.hist{display:flex;justify-content:space-between;gap:8px;padding:8px;border:1px solid var(--line);border-radius:7px;margin:6px 0;font-size:11px}.hist button{border:0;background:transparent;color:var(--blue);font-weight:700;cursor:pointer}
+@media(max-width:950px){.wrap{grid-template-columns:1fr}.invoice{padding:25px}.top{position:relative}}@media(max-width:600px){.row,.details{grid-template-columns:1fr}.items-head,.item{grid-template-columns:1fr 52px 70px 75px 30px}.invoice{padding:16px}.inv-head{flex-direction:column}.inv-title{text-align:left}.summary{width:100%}.company h2{font-size:20px}}
+@media print{body{background:#fff}.top,.panel{display:none}.wrap{display:block;margin:0;padding:0}.invoice{box-shadow:none;border-radius:0;padding:18mm;min-height:0}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand"><img src="1000825679.png" alt="Unique IT PK Services"><div><h1>Unique IT PK Services</h1><p>Smart Solutions for a Digital World</p></div></div><a class="back" href="index.html">← Main Website</a></header>
+<main class="wrap">
+<section class="panel no-print">
+<h2>Professional Invoice Generator</h2>
+<div class="row"><div><label>Invoice No.</label><input id="invoiceNo"></div><div><label>Invoice Date</label><input id="invoiceDate" type="date"></div></div>
+<div class="row"><div><label>Due Date</label><input id="dueDate" type="date"></div><div><label>Status</label><select id="status"><option>Unpaid</option><option>Paid</option><option>Partial</option></select></div></div>
+<label>Customer Name</label><input id="customer" placeholder="Customer / Company Name">
+<div class="row"><div><label>Phone</label><input id="phone"></div><div><label>Email</label><input id="email"></div></div>
+<label>Customer Address</label><textarea id="address"></textarea>
+<div class="items-head"><span>Service / Item</span><span>Qty</span><span>Rate</span><span>Amount</span><span></span></div>
+<div id="items"></div><button class="btn blue" onclick="addItem()">+ Add Item</button>
+<div class="row"><div><label>Discount</label><input id="discount" type="number" value="0" min="0" oninput="render()"></div><div><label>Tax %</label><input id="tax" type="number" value="0" min="0" oninput="render()"></div></div>
+<div class="row"><div><label>Paid Amount</label><input id="paid" type="number" value="0" min="0" oninput="render()"></div><div><label>Currency</label><select id="currency" onchange="render()"><option>PKR</option><option>USD</option><option>AED</option></select></div></div>
+<label>Notes / Payment Terms</label><textarea id="notes" placeholder="Thank you for choosing Unique IT PK Services."></textarea>
+<div class="btns"><button class="btn primary" onclick="saveInvoice()">Save Invoice</button><button class="btn dark" onclick="window.print()">Print / Save PDF</button><button class="btn light" onclick="newInvoice()">New Invoice</button></div>
+<div class="history"><b>Saved Invoices</b><div id="history" class="history-list"></div></div>
+</section>
+<section class="invoice" id="invoice">
+<div class="inv-head"><div class="company"><img src="1000825679.png" alt="Logo"><div><h2>Unique IT PK Services</h2><p>Smart Solutions for a Digital World</p><p>0305-5054165 · imran223344@gmail.com</p><p>Pakistan · www.uniqueitpk.com</p></div></div><div class="inv-title"><h1>INVOICE</h1><div><b>No:</b> <span id="pNo"></span></div><div><b>Date:</b> <span id="pDate"></span></div><div><b>Due:</b> <span id="pDue"></span></div></div></div>
+<div class="details"><div><h3>Bill To</h3><p><b id="pCustomer">Customer Name</b></p><p id="pPhone"></p><p id="pEmail"></p><p id="pAddress"></p></div><div style="text-align:right"><h3>Payment Status</h3><span class="status" id="pStatus">Unpaid</span></div></div>
+<table class="table"><thead><tr><th>#</th><th>Service / Item</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody id="pItems"></tbody></table>
+<div class="summary"><div class="sum"><span>Subtotal</span><b id="pSubtotal"></b></div><div class="sum"><span>Discount</span><b id="pDiscount"></b></div><div class="sum"><span>Tax</span><b id="pTax"></b></div><div class="sum grand"><span>Grand Total</span><b id="pTotal"></b></div><div class="sum"><span>Paid</span><b id="pPaid"></b></div><div class="sum"><span>Balance Due</span><b id="pBalance"></b></div></div>
+<div class="notes"><b>Notes / Terms:</b><div id="pNotes">Thank you for choosing Unique IT PK Services.</div></div><div class="sign">Authorized Signature<br><br>________________________<br><b>Unique IT PK Services</b></div>
+</section></main>
+<script>
+const $=id=>document.getElementById(id);let items=[];
+function today(){return new Date().toISOString().slice(0,10)}
+function money(n){return ($('currency').value||'PKR')+' '+Number(n||0).toLocaleString('en-PK',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function nextNo(){let n=Number(localStorage.getItem('uitpk_invoice_seq')||0)+1;localStorage.setItem('uitpk_invoice_seq',n);return 'UITPK-'+new Date().getFullYear()+'-'+String(n).padStart(4,'0')}
+function addItem(name='',qty=1,rate=0){items.push({name,qty,rate});renderItems()}
+function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function renderItems(){$('items').innerHTML=items.map((x,i)=>`<div class="item"><input value="${esc(x.name)}" placeholder="Service / Item" oninput="items[${i}].name=this.value;render()"><input type="number" min="0" value="${x.qty}" oninput="items[${i}].qty=this.value;render()"><input type="number" min="0" value="${x.rate}" oninput="items[${i}].rate=this.value;render()"><div class="amount">${money(Number(x.qty)*Number(x.rate))}</div><button class="del" onclick="items.splice(${i},1);renderItems()">×</button></div>`).join('');render()}
+function render(){let sub=items.reduce((a,x)=>a+Number(x.qty||0)*Number(x.rate||0),0),disc=Number($('discount').value||0),tax=Number($('tax').value||0),taxAmt=Math.max(0,sub-disc)*tax/100,total=Math.max(0,sub-disc)+taxAmt,paid=Number($('paid').value||0),bal=Math.max(0,total-paid);$('pNo').textContent=$('invoiceNo').value;$('pDate').textContent=$('invoiceDate').value;$('pDue').textContent=$('dueDate').value;$('pCustomer').textContent=$('customer').value||'Customer Name';$('pPhone').textContent=$('phone').value;$('pEmail').textContent=$('email').value;$('pAddress').textContent=$('address').value;$('pStatus').textContent=$('status').value;$('pSubtotal').textContent=money(sub);$('pDiscount').textContent=money(disc);$('pTax').textContent=money(taxAmt);$('pTotal').textContent=money(total);$('pPaid').textContent=money(paid);$('pBalance').textContent=money(bal);$('pNotes').textContent=$('notes').value||'Thank you for choosing Unique IT PK Services.';$('pItems').innerHTML=items.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.name||'Service')}</td><td>${x.qty}</td><td>${money(x.rate)}</td><td>${money(Number(x.qty)*Number(x.rate))}</td></tr>`).join('')||'<tr><td>1</td><td>Service / Item</td><td>1</td><td>'+money(0)+'</td><td>'+money(0)+'</td></tr>'}
+function data(){return {no:$('invoiceNo').value,date:$('invoiceDate').value,due:$('dueDate').value,status:$('status').value,customer:$('customer').value,phone:$('phone').value,email:$('email').value,address:$('address').value,items,discount:$('discount').value,tax:$('tax').value,paid:$('paid').value,currency:$('currency').value,notes:$('notes').value}}
+function saveInvoice(){let d=data(),all=JSON.parse(localStorage.getItem('uitpk_invoices')||'[]');let idx=all.findIndex(x=>x.no===d.no);if(idx>=0)all[idx]=d;else all.unshift(d);localStorage.setItem('uitpk_invoices',JSON.stringify(all));loadHistory();alert('Invoice saved successfully.')}
+function load(d){Object.keys(d).forEach(k=>{if(k!=='items'&&$(k))$(k).value=d[k]});items=d.items||[];renderItems()}
+function newInvoice(){$('invoiceNo').value=nextNo();$('invoiceDate').value=today();$('dueDate').value=today();$('status').value='Unpaid';['customer','phone','email','address','notes'].forEach(x=>$(x).value='');$('discount').value=0;$('tax').value=0;$('paid').value=0;$('currency').value='PKR';items=[];addItem()}
+function loadHistory(){let all=JSON.parse(localStorage.getItem('uitpk_invoices')||'[]');$('history').innerHTML=all.slice(0,20).map((x,i)=>`<div class="hist"><span><b>${esc(x.no)}</b><br>${esc(x.customer||'No customer')}</span><button onclick="load(JSON.parse(localStorage.getItem('uitpk_invoices'))[${i}])">Open</button></div>`).join('')||'<small>No saved invoices yet.</small>'}
+$('invoiceNo').addEventListener('input',render);['invoiceDate','dueDate','status','customer','phone','email','address','notes'].forEach(id=>$(id).addEventListener('input',render));newInvoice();loadHistory();
+</script>
+</body></html>
